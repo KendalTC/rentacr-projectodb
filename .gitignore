@@ -1,0 +1,15 @@
+# Contraseñas y credenciales
+*.pfx
+*.pvk
+*.p12
+secrets.txt
+credentials.txt
+
+# Archivos de auditoría con datos sensibles
+*.sqlaudit
+
+# Archivos temporales
+*.tmp
+*.log
+Thumbs.db
+.DS_Store

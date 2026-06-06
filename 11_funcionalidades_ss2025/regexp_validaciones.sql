@@ -1,0 +1,14 @@
+-- =============================================================================
+-- regexp_validaciones.sql
+-- Expresiones Regulares Avanzadas (REGEXP_LIKE) — SQL Server 2025
+-- Proyecto: RentaCR | IF5100 Administración de Bases de Datos
+-- Alumno: Kendall Trejos Cubero — C4K374
+-- =============================================================================
+-- El alumno provee el contenido completo de este archivo.
+-- Estado: REGEXP_LIKE no disponible en build 17.0.1115.1 (RTM-GDR).
+-- Implementación actual usa LIKE en los SPs de validación:
+--   - vehiculo.sp_ValidarVehiculo   (Placa y VIN)
+--   - persona.sp_ValidarContacto    (correo y teléfono)
+--   - persona.sp_ValidarIdentificacion (cédula física)
+-- Solución pendiente: actualizar a CU posterior de SQL Server 2025.
+-- =============================================================================

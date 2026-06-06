@@ -1,0 +1,9 @@
+-- =============================================================================
+-- RentaCR_Vistas_v1.sql
+-- Vistas de seguridad, roles, DDM y RLS para la base de datos RentaCR
+-- Proyecto: RentaCR | IF5100 Administración de Bases de Datos
+-- Alumno: Kendall Trejos Cubero — C4K374
+-- =============================================================================
+-- El alumno provee el contenido completo de este archivo.
+-- Incluye: 41 vistas (1 por tabla), roles de BD, DDM y políticas RLS.
+-- =============================================================================

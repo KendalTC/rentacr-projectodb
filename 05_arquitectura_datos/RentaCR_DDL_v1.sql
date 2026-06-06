@@ -1,0 +1,9 @@
+-- =============================================================================
+-- RentaCR_DDL_v1.sql
+-- DDL completo de la base de datos RentaCR
+-- Proyecto: RentaCR | IF5100 Administración de Bases de Datos
+-- Alumno: Kendall Trejos Cubero — C4K374
+-- =============================================================================
+-- El alumno provee el contenido completo de este archivo.
+-- DDL incluye: 4 esquemas, 41 tablas, índices, constraints, SPs y funciones.
+-- =============================================================================

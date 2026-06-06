@@ -1,0 +1,10 @@
+-- =============================================================================
+-- hardening_cis_ss2022_rentacr.sql
+-- Hardening CIS Microsoft SQL Server 2022 Benchmark v1.2.1
+-- Proyecto: RentaCR | IF5100 Administración de Bases de Datos
+-- Alumno: Kendall Trejos Cubero — C4K374
+-- =============================================================================
+-- El alumno provee el contenido completo de este script.
+-- Este archivo aplica los controles CIS SS2022 v1.2.1 secciones 2-7,
+-- incluyendo auditoría (9 action groups) y TDE (AES-256).
+-- =============================================================================

@@ -1,0 +1,12 @@
+-- =============================================================================
+-- backup_restore.sql
+-- Scripts de Backup y Restauración — RentaCR
+-- Proyecto: RentaCR | IF5100 Administración de Bases de Datos
+-- Alumno: Kendall Trejos Cubero — C4K374
+-- =============================================================================
+-- El alumno provee el contenido completo de este archivo.
+-- Incluye: comandos BACKUP DATABASE, RESTORE VERIFYONLY,
+-- procedimiento de restauración con certificado TDE.
+-- NOTA: Los backups están cifrados con TDE (AES-256).
+--       Se requiere CertTDE_RentaCR.cer + .pvk para restaurar.
+-- =============================================================================

@@ -1,0 +1,11 @@
+-- =============================================================================
+-- vector_search.sql
+-- Vector Data and Semantic Search — SQL Server 2025
+-- Proyecto: RentaCR | IF5100 Administración de Bases de Datos
+-- Alumno: Kendall Trejos Cubero — C4K374
+-- =============================================================================
+-- El alumno provee el contenido completo de este archivo.
+-- Incluye: columna VECTOR(1536), carga de vectores sintéticos,
+-- consultas con VECTOR_DISTANCE cosine y (cuando disponible) índice DiskANN.
+-- Estado: Funcional sin índice DiskANN — limitación de build 17.0.1115.1 RTM-GDR
+-- =============================================================================

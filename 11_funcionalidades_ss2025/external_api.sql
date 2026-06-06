@@ -1,0 +1,11 @@
+-- =============================================================================
+-- external_api.sql
+-- External REST API Calls — SQL Server 2025
+-- Proyecto: RentaCR | IF5100 Administración de Bases de Datos
+-- Alumno: Kendall Trejos Cubero — C4K374
+-- =============================================================================
+-- El alumno provee el contenido completo de este archivo.
+-- Incluye: sp_ObtenerTipoCambioBCCR usando sp_invoke_external_rest_endpoint.
+-- Estado: Feature habilitada y funcional; API BCCR caída al momento de prueba.
+--         Prueba alternativa con httpbin.org devuelve HTTP 200 correctamente.
+-- =============================================================================

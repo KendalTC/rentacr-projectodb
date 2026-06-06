@@ -1,0 +1,9 @@
+-- =============================================================================
+-- RentaCR_Poblacion_v2.sql
+-- Script de población de la base de datos RentaCR
+-- Proyecto: RentaCR | IF5100 Administración de Bases de Datos
+-- Alumno: Kendall Trejos Cubero — C4K374
+-- =============================================================================
+-- El alumno provee el contenido completo de este archivo.
+-- Este script inserta datos de prueba en todas las tablas (mínimo 10 por tabla).
+-- =============================================================================

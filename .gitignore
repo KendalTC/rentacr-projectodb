@@ -1,15 +1,24 @@
-# Contraseñas y credenciales
+# Credenciales y certificados
 *.pfx
 *.pvk
 *.p12
 secrets.txt
 credentials.txt
+IP_VM.txt
 
-# Archivos de auditoría con datos sensibles
+# Auditorías SQL Server (pueden contener datos sensibles)
 *.sqlaudit
 
-# Archivos temporales
+# PDFs de estándares CIS (copyright restringido - referenciar con enlace)
+CIS_Microsoft_*.pdf
+
+# Archivos internos de Claude Code
+.claude/
+INSTRUCCIONES_CLAUDE_CODE.md
+
+# Temporales y OS
 *.tmp
 *.log
 Thumbs.db
 .DS_Store
+desktop.ini

@@ -141,18 +141,50 @@ El proyecto implementa un ecosistema seguro con hardening de plataforma operativ
 
 ```
 rentacr-projectodb/
-├── 01_ecosistema/          # Azure VM, Windows Server 2025, Antimalware
-├── 02_hardening_os/        # CIS WS2025, scripts PowerShell
-├── 03_instalacion_sgbdr/   # SQL Server 2025, mejores prácticas
-├── 04_hardening_sgbdr/     # CIS SS2022, TDE, auditoría
-├── 05_arquitectura_datos/  # DDL, modelo lógico, LUNs
-├── 06_tablas_inmemory/     # In-Memory OLTP
-├── 07_poblacion/           # Scripts de población
-├── 08_seguridad/           # Vistas, roles, DDM, RLS
-├── 09_alta_disponibilidad/ # Azure SQL Database PaaS
-├── 10_serializacion_json/  # JSON serialization
-├── 11_funcionalidades_ss2025/ # Vector Search, API, REGEXP
-└── 12_backup_restore/      # Backups y restauración
+├── README.md
+├── .gitignore
+│
+├── docs/
+│   ├── enunciado/                          # Enunciado oficial del proyecto (PDF)
+│   ├── requerimientos/                     # Requerimientos funcionales V1 y V2 (Word)
+│   └── bloques/                            # Documentación por bloque de evaluación
+│       ├── bloque05_ecosistema.md
+│       ├── bloque06_hardening_os.md
+│       ├── bloque07_instalacion_sgbdr.md
+│       ├── bloque08_hardening_sgbdr.md
+│       ├── bloque09_arquitectura_datos.md
+│       ├── bloque09b_funcionalidades_ss2025.md
+│       ├── bloque10_tablas_inmemory.md
+│       ├── bloque11_poblacion.md
+│       ├── bloque12_seguridad.md
+│       ├── bloque13_alta_disponibilidad.md
+│       ├── bloque14_serializacion_json.md
+│       └── backup_restore.md
+│
+├── sql/
+│   ├── ddl/                                # DDL completo — 41 tablas, 4 esquemas
+│   ├── dml/                                # Scripts de población (10+ registros/tabla)
+│   ├── seguridad/                          # Vistas, roles, DDM, RLS, CIS SS2022
+│   ├── funcionalidades/                    # Vector Search, External API, RegEx
+│   └── operaciones/                        # Backup y restauración
+│
+├── powershell/
+│   ├── hardening-os/                       # CIS WS2025: script maestro + partes 1-5
+│   ├── auditoria/                          # Scripts de auditoría CIS WS2025 v1 y v2
+│   └── antimalware/                        # Configuración Windows Defender ATP
+│
+├── diagramas/
+│   ├── conceptual/                         # Modelo conceptual draw.io (v1 → v5)
+│   └── logico/                             # DBML, PDF y PNG del modelo lógico
+│
+├── mockups/
+│   ├── mockups_rentacr.html                # Visor HTML de los mockups
+│   └── screens/                            # 17 pantallas PNG del sistema
+│
+└── CLAUDE/                                 # Contexto y configuración para Claude Code
+    ├── CONTEXTO_v2.md
+    ├── INSTRUCCIONES.md
+    └── SKILL.md
 ```
 
 ---

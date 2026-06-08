@@ -1,3 +1,31 @@
+-- =============================================================================
+-- external_api.sql
+-- External REST API Calls — SQL Server 2025
+-- Proyecto: RentaCR | IF5100 Administración de Bases de Datos
+-- Alumno: Kendall Trejos Cubero — C4K374
+-- =============================================================================
+-- SP: alquiler.sp_ObtenerTipoCambioBCCR
+-- Feature: sp_invoke_external_rest_endpoint habilitada
+-- API: exchangerate-api.com (fuente alternativa — BCCR bloquea IPs de Azure)
+-- Estado: FUNCIONAL — HTTP 200, datos reales insertados en ref.TipoCambio
+-- =============================================================================
+
+USE [RentaCR];
+GO
+
+-- =============================================================================
+-- 1. HABILITAR FEATURE (ejecutar una sola vez)
+-- =============================================================================
+USE [master];
+GO
+
+EXEC sp_configure 'external rest endpoint enabled', 1;
+RECONFIGURE;
+GO
+
+-- =============================================================================
+-- 2. STORED PROCEDURE
+-- =============================================================================
 USE [RentaCR];
 GO
 
@@ -28,7 +56,9 @@ BEGIN
     DECLARE @venta      DECIMAL(12,4);
     DECLARE @moneda_id  SMALLINT;
 
-    -- API alternativa: exchangerate-api.com (BCCR bloquea IPs de Azure)
+    -- API: exchangerate-api.com
+    -- Nota: API original del BCCR (gee.bccr.fi.cr) devuelve HTTP 500 desde IPs de Azure.
+    --       Se usa exchangerate-api.com como fuente alternativa confiable.
     SET @url = 'https://api.exchangerate-api.com/v4/latest/USD';
 
     EXEC sp_invoke_external_rest_endpoint
@@ -50,7 +80,9 @@ BEGIN
 END;
 GO
 
--- Probar el SP
+-- =============================================================================
+-- 3. PRUEBA
+-- =============================================================================
 DECLARE @id INT;
 
 EXEC [alquiler].[sp_ObtenerTipoCambioBCCR]
@@ -59,6 +91,14 @@ EXEC [alquiler].[sp_ObtenerTipoCambioBCCR]
 
 SELECT @id AS TipoCambio_ID_Insertado;
 
--- Verificar el registro insertado
+-- Verificar registro insertado
 SELECT * FROM [ref].[TipoCambio] WHERE TipoCambio_ID = @id;
+GO
+
+-- =============================================================================
+-- 4. VERIFICAR FEATURE HABILITADA
+-- =============================================================================
+SELECT name, value_in_use
+FROM sys.configurations
+WHERE name = 'external rest endpoint enabled';
 GO

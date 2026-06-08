@@ -99,3 +99,16 @@ Aplicar el estándar CIS Microsoft SQL Server 2022 Benchmark v1.2.1, configurar 
 | Backup private key | G:\SQLBackups\CertTDE_RentaCR.pvk |
 
 > **Importante:** Los archivos .mdf, .ldf y .bak de RentaCR están cifrados en disco. Sin el certificado no es posible restaurar la base de datos.
+
+---
+
+## Evidencias
+
+| # | Archivo | Descripción |
+|---|---------|-------------|
+| 1 | ![01](../../evidencias/bloque08_hardening_sgbdr/01_surface_area_reduction_cis_ss2022.png) | Surface Area Reduction aplicada: xp_cmdshell, OLE Automation, remote access y CLR deshabilitados |
+| 2 | ![02](../../evidencias/bloque08_hardening_sgbdr/02_auditoria_9_action_groups.png) | SQL Server Audit `Audit_RentaCR` configurada con los 9 action groups enviando eventos al APPLICATION_LOG |
+| 3 | ![03](../../evidencias/bloque08_hardening_sgbdr/03_certificado_tde_rentacr.png) | Certificado `CertTDE_RentaCR` creado sobre la Master Key para cifrado TDE |
+| 4 | ![04](../../evidencias/bloque08_hardening_sgbdr/04_logins_sysadmin_verificados.png) | Logins con rol sysadmin verificados — únicamente cuentas del sistema autorizadas |
+| 5 | ![05](../../evidencias/bloque08_hardening_sgbdr/05_tde_cifrado_completo_aes256.png) | TDE completamente aplicado: `encryption_state = 3` (cifrado completo), algoritmo AES_256 |
+| 6 | ![06](../../evidencias/bloque08_hardening_sgbdr/06_restore_exitos.png) | Restauración exitosa de la base de datos desde backup cifrado con el certificado TDE |

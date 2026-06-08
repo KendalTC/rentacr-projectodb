@@ -60,3 +60,16 @@ F:\SQLTempDB              — TempDB
 G:\SQLBackups             — Backups
 G:\SQLAudits              — Auditorías
 ```
+
+---
+
+## Evidencias
+
+| # | Archivo | Descripción |
+|---|---------|-------------|
+| 1 | ![01](../../evidencias/bloque07_instalacion_sgbdr/01_sa_renombrado_deshabilitado.png) | Login `sa` renombrado a `sa_rentacr` y deshabilitado (CIS 3.2) |
+| 2 | ![02](../../evidencias/bloque07_instalacion_sgbdr/02_mixed_mode_auth_verificado.png) | Autenticación Mixed Mode (Windows + SQL Server) habilitada y verificada |
+| 3 | ![03](../../evidencias/bloque07_instalacion_sgbdr/03_force_encryption_tls_habilitado.png) | Force Encryption habilitado — obliga TLS 1.2+ en todas las conexiones al motor |
+| 4 | ![04](../../evidencias/bloque07_instalacion_sgbdr/04_puerto_tcp_1434_configurado.png) | Puerto TCP cambiado de 1433 (default) a 1434 para reducir superficie de ataque |
+| 5 | ![05](../../evidencias/bloque07_instalacion_sgbdr/05_version_instancia_collation.png) | Versión SQL Server 2025 (17.0.1115.1) y collation SQL_Latin1_General_CP1_CI_AI confirmados |
+| 6 | ![06](../../evidencias/bloque07_instalacion_sgbdr/06_sp_configure_mejores_practicas.png) | Configuración del motor via `sp_configure`: max memory 4096 MB, MAXDOP 1, optimize for ad hoc workloads habilitado |

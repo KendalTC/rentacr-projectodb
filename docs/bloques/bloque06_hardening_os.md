@@ -490,3 +490,17 @@ Los siguientes controles del estándar fueron omitidos intencionalmente por inco
 - `CredSSP AllowEncryptionOracle=0`
 - `UserAuthentication=1` (NLA forzado)
 - `MinEncryptionLevel=3`
+
+---
+
+## Evidencias
+
+| # | Archivo | Descripción |
+|---|---------|-------------|
+| 1 | ![01](../../evidencias/bloque06_hardening_os/01_politica_cuentas_net_accounts.png) | Políticas de contraseña aplicadas via `net accounts`: historial 24, longitud mínima 14, bloqueo tras 5 intentos |
+| 2 | ![02](../../evidencias/bloque06_hardening_os/02_servicio_remote_registry_deshabilitado.png) | Servicio Remote Registry deshabilitado (control CIS 5.x — reduce superficie de ataque) |
+| 3 | ![03](../../evidencias/bloque06_hardening_os/03_actualizaciones_hotfix_instaladas.png) | Hotfixes y actualizaciones de seguridad instaladas en el sistema operativo |
+| 4 | ![04](../../evidencias/bloque06_hardening_os/04_politica_auditoria_avanzada.png) | Política de auditoría avanzada configurada via `auditpol` (sección 17 del benchmark) |
+| 5 | ![05](../../evidencias/bloque06_hardening_os/05_firewall_tres_perfiles_activos.png) | Windows Defender Firewall activo en los tres perfiles: Domain, Private y Public |
+| 6 | ![06](../../evidencias/bloque06_hardening_os/06_resumen_auditoria_cis_ws2025.png) | Resumen final del script de auditoría CIS WS2025 con conteo de controles PASS/FAIL/SKIP |
+| 7 | ![07](../../evidencias/bloque06_hardening_os/07_ntlmv2_smb_signing.png) | NTLMv2 configurado como único protocolo de autenticación de red y SMB signing habilitado |

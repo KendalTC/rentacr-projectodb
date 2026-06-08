@@ -54,3 +54,11 @@ EXEC [persona].[sp_SerializarClientesJSON];
 ```
 
 **Resultado:** JSON completo con los 13 clientes (10 físicos + 3 jurídicos) con sus contactos, direcciones e identificaciones anidadas.
+
+---
+
+## Evidencias
+
+| # | Archivo | Descripción |
+|---|---------|-------------|
+| 1 | ![01](../../evidencias/bloque14_serializacion_json/01_sp_serializar_clientes_json_resultado.png) | Resultado del SP `sp_SerializarClientesJSON` mostrando el JSON anidado con los 13 clientes, sus contactos, direcciones e identificaciones |

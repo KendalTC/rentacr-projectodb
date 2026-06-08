@@ -99,3 +99,14 @@ Siguiendo las mejores prácticas para SQL Server, los archivos de base de datos 
 | PUA Protection | On |
 | Network Protection | On |
 | Escaneo programado | Domingos 2AM — Full Scan |
+
+---
+
+## Evidencias
+
+| # | Archivo | Descripción |
+|---|---------|-------------|
+| 1 | ![02](../../evidencias/bloque05_ecosistema/02_acerca_de_windows_ws2025_datacenter.png) | Versión y edición de Windows Server 2025 Datacenter confirmada en la VM |
+| 2 | ![03](../../evidencias/bloque05_ecosistema/03_seguridad_windows_vista_general.png) | Centro de seguridad de Windows con todos los componentes activos |
+| 3 | ![04](../../evidencias/bloque05_ecosistema/04_estado_antivirus_defender_powershell.png) | Estado de Windows Defender ATP verificado via PowerShell con exclusiones SQL Server aplicadas |
+| 4 | ![05](../../evidencias/bloque05_ecosistema/05_informacion_vm_azure_sistema_operativo.png) | Información del sistema operativo en la VM Azure vm-projectdb (Standard_B2as_v2, Canada Central) |

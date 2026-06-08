@@ -137,6 +137,24 @@ El proyecto implementa un ecosistema seguro con hardening de plataforma operativ
 
 ---
 
+## Documentación por Bloque
+
+| Bloque | Descripción | Pts | Doc |
+|--------|-------------|-----|-----|
+| 05 | Ecosistema — Azure, WS2025, Defender | 10 | [Ver →](docs/bloques/bloque05_ecosistema.md) |
+| 06 | Hardening OS — CIS WS2025 v2.0.0 | 5 | [Ver →](docs/bloques/bloque06_hardening_os.md) |
+| 07 | Instalación y configuración SGBDR | 5 | [Ver →](docs/bloques/bloque07_instalacion_sgbdr.md) |
+| 08 | Hardening SGBDR — CIS SS2022 + Auditoría + TDE | 5 | [Ver →](docs/bloques/bloque08_hardening_sgbdr.md) |
+| 09 | Arquitectura de datos — DDL, LUNs, modelo lógico | 30 | [Ver →](docs/bloques/bloque09_arquitectura_datos.md) |
+| 09b | Funcionalidades SS2025 — Vector, API, RegEx | — | [Ver →](docs/bloques/bloque09b_funcionalidades_ss2025.md) |
+| 10 | Tablas In-Memory OLTP | 3 | [Ver →](docs/bloques/bloque10_tablas_inmemory.md) |
+| 11 | Población — 10+ registros por tabla | 2 | [Ver →](docs/bloques/bloque11_poblacion.md) |
+| 12 | Seguridad y regulación — Vistas, Roles, DDM, RLS | 10 | [Ver →](docs/bloques/bloque12_seguridad.md) |
+| 13 | Alta disponibilidad — Azure PaaS | 10 | [Ver →](docs/bloques/bloque13_alta_disponibilidad.md) |
+| 14 | Serialización JSON | 5 | [Ver →](docs/bloques/bloque14_serializacion_json.md) |
+
+---
+
 ## Estructura del Repositorio
 
 ```
@@ -174,7 +192,7 @@ rentacr-projectodb/
 │   └── antimalware/                        # Configuración Windows Defender ATP
 │
 ├── diagramas/
-│   ├── conceptual/                         # Modelo conceptual draw.io (v1 → v5)
+│   ├── conceptual/                         # Modelo conceptual draw.io — versión definitiva v5
 │   └── logico/                             # DBML, PDF y PNG del modelo lógico
 │
 ├── mockups/
@@ -233,3 +251,24 @@ rentacr-projectodb/
 
 ### Bloque 14 — Serialización JSON (5 pts)
 - [x] sp_SerializarClientesJSON funcional con datos reales — 5 pts
+
+---
+
+## Mockups del Sistema
+
+Diseño de la interfaz de usuario de RentaCR. Visualizador interactivo: [`mockups/mockups_rentacr.html`](mockups/mockups_rentacr.html)
+
+| | | |
+|---|---|---|
+| ![Dashboard](mockups/screens/1.Main_Dashboard.png) | ![Clientes](mockups/screens/2.ListaClientes.png) | ![Registro Cliente](mockups/screens/3.RegistroClienteFisico.png) |
+| **Dashboard principal** | **Lista de clientes** | **Registro cliente físico** |
+| ![Persona Jurídica](mockups/screens/4.RegistroPersonaJuridica.png) | ![Detalle Cliente](mockups/screens/5.DetalleClienteDatosGenerales.png) | ![Características](mockups/screens/6.DetalleCliente_Caracteristicas.png) |
+| **Registro persona jurídica** | **Detalle cliente — datos generales** | **Detalle cliente — características** |
+| ![Registro Vehículo](mockups/screens/7.RegistroVehiculo.png) | ![Detalle Vehículo](mockups/screens/8.DetalleVehiculo.png) | ![Nuevo Contrato](mockups/screens/9.NuevoContrato_Cliente.png) |
+| **Registro de vehículo** | **Detalle de vehículo** | **Nuevo contrato — selección cliente** |
+| ![Fechas Contrato](mockups/screens/10.NuevoContratoFechas.png) | ![Detalle Contrato](mockups/screens/11.DetalleContrato.png) | ![Devolución](mockups/screens/12.DevolucionVehiculo.png) |
+| **Nuevo contrato — fechas** | **Detalle de contrato** | **Devolución de vehículo** |
+| ![Registrar Pago](mockups/screens/13.RegistrarPago.png) | ![Historial Pagos](mockups/screens/14.HistorialPagos.png) | ![Sucursales](mockups/screens/15.Sucursales.png) |
+| **Registrar pago** | **Historial de pagos** | **Gestión de sucursales** |
+| ![Empleados](mockups/screens/16.Empleados.png) | ![Usuarios y Roles](mockups/screens/17.UsuariosRoles.png) | |
+| **Gestión de empleados** | **Usuarios y roles** | |

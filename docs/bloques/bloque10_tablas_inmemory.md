@@ -57,3 +57,13 @@ RETURN (
 ```
 
 > **Nota técnica:** Las funciones inline TVF para RLS en tablas in-memory requieren NATIVE_COMPILATION. No pueden hacer subqueries a otras tablas — solo pueden validar roles o variables de sesión.
+
+---
+
+## Evidencias
+
+| # | Archivo | Descripción |
+|---|---------|-------------|
+| 1 | ![01](../../evidencias/bloque10_tablas_inmemory/01_tabla_inmemory_datos_poblados.png) | Tabla `DisponibilidadVehiculo` con 15 registros poblados en la tabla In-Memory |
+| 2 | ![02](../../evidencias/bloque10_tablas_inmemory/02_filegroup_memory_optimized_ruta.png) | Filegroup `RentaCR_MemOpt` de tipo MEMORY_OPTIMIZED_DATA ubicado en D:\SQLData |
+| 3 | ![03](../../evidencias/bloque10_tablas_inmemory/03_tabla_inmemory_configuracion_durabilidad.png) | Propiedades de la tabla confirmando MEMORY_OPTIMIZED=ON y DURABILITY=SCHEMA_AND_DATA |

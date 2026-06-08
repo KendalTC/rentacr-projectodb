@@ -75,3 +75,15 @@ EXEC [alquiler].[sp_ObtenerTipoCambioBCCR]
 | vehiculo.sp_ValidarVehiculo | Placa: [A-Z][A-Z][A-Z]-[0-9][0-9][0-9] |
 | persona.sp_ValidarContacto | Correo: LIKE '%@%.%' |
 | persona.sp_ValidarIdentificacion | Cédula: [1-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9] |
+
+---
+
+## Evidencias
+
+Las evidencias de este bloque se encuentran en la carpeta `bloque09_arquitectura_datos` ya que comparten bloque de evaluación.
+
+| # | Archivo | Descripción |
+|---|---------|-------------|
+| 1 | ![02](../../evidencias/bloque09_arquitectura_datos/02_vector_distance_busqueda_semantica.png) | Resultado de VECTOR_DISTANCE cosine — ranking de vehículos por similitud semántica |
+| 2 | ![03](../../evidencias/bloque09_arquitectura_datos/03_columna_vector_1536_vehiculos.png) | Columna VECTOR(1536) en `vehiculo.Vehiculo` con datos vectoriales cargados |
+| 3 | ![04](../../evidencias/bloque09_arquitectura_datos/04_stored_procedures_creados.png) | SPs de External API (`sp_ObtenerTipoCambioBCCR`) y serialización JSON visibles en el árbol de objetos |

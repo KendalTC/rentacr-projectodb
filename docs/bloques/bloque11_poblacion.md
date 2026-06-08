@@ -62,3 +62,11 @@ Poblar todas las tablas con un mínimo de 10 registros cada una, usando datos co
 - **Vehículos:** 15 (Toyota, Hyundai, Kia, Suzuki, Nissan, Ford, Chevrolet, VW, Mitsubishi, Honda)
 - **Contratos:** 15 (13 cerrados + 2 activos)
 - **Tipos de pago:** Efectivo, TarjetaDebito, TarjetaCredito, Transferencia
+
+---
+
+## Evidencias
+
+| # | Archivo | Descripción |
+|---|---------|-------------|
+| 1 | ![01](../../evidencias/bloque11_poblacion/01_conteo_registros_por_tabla_estado.png) | Conteo de registros por tabla confirmando el mínimo de 10 registros en todas las tablas de RentaCR |

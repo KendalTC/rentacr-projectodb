@@ -88,3 +88,15 @@ Toda consulta a datos se hace exclusivamente a través de vistas. Nunca se otorg
 | Control de acceso por rol | Roles + vistas — sin permisos directos |
 | Auditoría de accesos | SQL Server Audit — 9 action groups |
 | Cifrado en tránsito | Force Encryption TLS 1.2+ |
+
+---
+
+## Evidencias
+
+| # | Archivo | Descripción |
+|---|---------|-------------|
+| 1 | ![01](../../evidencias/bloque12_seguridad/01_vistas_41_por_esquema.png) | Las 41 vistas creadas organizadas por esquema — único punto de acceso a los datos |
+| 2 | ![02](../../evidencias/bloque12_seguridad/02_dynamic_data_masking_columnas.png) | DDM aplicado: `email()` en correo electrónico, `partial()` en número de cédula, `default()` en dirección |
+| 3 | ![03](../../evidencias/bloque12_seguridad/03_rls_politicas_seguridad_sucursal.png) | Políticas RLS activas: `PolicyContratoSucursal` y `PolicyDisponibilidadSucursal` filtrando por sucursal |
+| 4 | ![04](../../evidencias/bloque12_seguridad/04_tde_cifrado_confirmado_rentacr.png) | TDE confirmado en RentaCR: `encryption_state = 3` (cifrado completo) e `is_encrypted = 1` |
+| 5 | ![05](../../evidencias/bloque12_seguridad/05_roles_base_datos_creados.png) | Roles `db_Administrativo`, `db_Mantenimiento` y `db_LecturaGeneral` creados con sus permisos correspondientes |

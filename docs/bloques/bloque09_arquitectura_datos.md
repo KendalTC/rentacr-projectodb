@@ -92,3 +92,15 @@ Modelo de datos completo para el sistema RentaCR, con LUNs separados por tipo de
 | Compatibility Level | 170 |
 | Estado | ⚠️ No disponible en esta build — requiere CU posterior |
 | Alternativa | Validación con LIKE implementada en los 3 SPs |
+
+---
+
+## Evidencias
+
+| # | Archivo | Descripción |
+|---|---------|-------------|
+| 1 | ![01](../../evidencias/bloque09_arquitectura_datos/01_tablas_por_esquema_con_registros.png) | Tablas de RentaCR organizadas por esquema (ref, persona, vehiculo, alquiler) con conteo de registros |
+| 2 | ![02](../../evidencias/bloque09_arquitectura_datos/02_vector_distance_busqueda_semantica.png) | Consulta VECTOR_DISTANCE con métrica cosine devolviendo los vehículos más similares a un vector de búsqueda |
+| 3 | ![03](../../evidencias/bloque09_arquitectura_datos/03_columna_vector_1536_vehiculos.png) | Columna VECTOR(1536) en `vehiculo.Vehiculo.DescripcionVector` con datos vectoriales sintéticos de 15 vehículos |
+| 4 | ![04](../../evidencias/bloque09_arquitectura_datos/04_stored_procedures_creados.png) | Stored procedures creados: validación (placa, correo, cédula), External API BCCR y serialización JSON |
+| 5 | ![05](../../evidencias/bloque09_arquitectura_datos/05_filegroups_luns_rutas_fisicas.png) | Filegroups y rutas físicas confirmando distribución de archivos en los LUNs D:, E:, F: y G: |

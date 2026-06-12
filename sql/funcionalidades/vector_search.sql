@@ -5,16 +5,22 @@
 -- Alumno: Kendall Trejos Cubero — C4K374
 -- =============================================================================
 -- Columna: vehiculo.Vehiculo.DescripcionVector VECTOR(1536)
--- Función: VECTOR_DISTANCE con métrica cosine
--- Índice DiskANN: no disponible en build 17.0.1115.1 RTM-GDR
--- Estado: FUNCIONAL sin índice
+-- Índice:  DiskANN (IX_Vehiculo_DescripcionVector) — FUNCIONAL ✅
+-- Funciones: VECTOR_DISTANCE + VECTOR_SEARCH
+-- Estado: COMPLETAMENTE FUNCIONAL ✅
 -- =============================================================================
 
 USE [RentaCR];
 GO
 
 -- =============================================================================
--- 1. VERIFICAR COLUMNA VECTOR(1536)
+-- 1. HABILITAR PREVIEW FEATURES (requerido para VECTOR_SEARCH + DiskANN)
+-- =============================================================================
+ALTER DATABASE SCOPED CONFIGURATION SET PREVIEW_FEATURES = ON;
+GO
+
+-- =============================================================================
+-- 2. VERIFICAR COLUMNA VECTOR(1536)
 -- =============================================================================
 SELECT 
     t.name AS Tabla,
@@ -27,7 +33,36 @@ WHERE s.name = 'vehiculo' AND t.name = 'Vehiculo' AND c.name = 'DescripcionVecto
 GO
 
 -- =============================================================================
--- 2. VERIFICAR VECTORES CARGADOS
+-- 3. VERIFICAR ÍNDICE DISKANN
+-- =============================================================================
+SELECT 
+    i.name AS Indice,
+    i.type_desc AS Tipo,
+    t.name AS Tabla
+FROM sys.indexes i
+JOIN sys.tables t ON i.object_id = t.object_id
+JOIN sys.schemas s ON t.schema_id = s.schema_id
+WHERE s.name = 'vehiculo' AND t.name = 'Vehiculo'
+ORDER BY i.name;
+GO
+
+-- =============================================================================
+-- 4. CREAR ÍNDICE DISKANN (si no existe)
+-- =============================================================================
+IF NOT EXISTS (
+    SELECT 1 FROM sys.indexes 
+    WHERE object_id = OBJECT_ID('vehiculo.Vehiculo') 
+    AND name = 'IX_Vehiculo_DescripcionVector'
+)
+BEGIN
+    CREATE VECTOR INDEX IX_Vehiculo_DescripcionVector
+    ON [vehiculo].[Vehiculo] (DescripcionVector)
+    WITH (METRIC = 'cosine', TYPE = 'diskann');
+END
+GO
+
+-- =============================================================================
+-- 5. VERIFICAR VECTORES CARGADOS
 -- =============================================================================
 SELECT 
     v.Vehiculo_ID,
@@ -40,13 +75,17 @@ ORDER BY v.Vehiculo_ID;
 GO
 
 -- =============================================================================
--- 3. CARGAR VECTORES SINTÉTICOS (si están vacíos)
--- Vectores por categoría:
+-- 6. CARGAR VECTORES SINTÉTICOS (ejecutar si columna está vacía)
+-- Vectores por categoría semántica:
 --   ECO/MINI  = 0.1 (bajo consumo, ciudad)
 --   SEDAN     = 0.3 (confort estándar)
---   SUV       = 0.5 (terreno variado)
---   PICKUP    = 0.9 (trabajo y carga)
+--   SUV       = 0.5 (terreno variado, familiar)
+--   PICKUP    = 0.9 (trabajo, carga, campo)
 -- =============================================================================
+-- Eliminar índice antes de actualizar vectores
+DROP INDEX IF EXISTS IX_Vehiculo_DescripcionVector ON [vehiculo].[Vehiculo];
+GO
+
 
 -- ECO y MINI
 DECLARE @jsonEco NVARCHAR(MAX) = '';
@@ -108,9 +147,15 @@ SET DescripcionVector = CAST(@jsonPickup AS VECTOR(1536))
 WHERE CategoriaVehiculo_ID = 4;
 GO
 
+
+-- Recrear índice DiskANN
+CREATE VECTOR INDEX IX_Vehiculo_DescripcionVector
+ON [vehiculo].[Vehiculo] (DescripcionVector)
+WITH (METRIC = 'cosine', TYPE = 'diskann');
+GO
 -- =============================================================================
--- 4. CONSULTA VECTOR_DISTANCE — Búsqueda semántica de vehículos similares
--- Busca los 5 vehículos más similares a un vector de búsqueda (SUV)
+-- 7. VECTOR_DISTANCE — Búsqueda exacta de similitud semántica
+-- Busca los 5 vehículos más similares a un perfil SUV
 -- =============================================================================
 DECLARE @json NVARCHAR(MAX) = '';
 DECLARE @i INT = 1;
@@ -136,14 +181,33 @@ ORDER BY Distancia ASC;
 GO
 
 -- =============================================================================
--- 5. NOTA — Índice DiskANN
--- La sintaxis CREATE VECTOR INDEX no está disponible en build 17.0.1115.1 RTM-GDR.
--- Requiere actualización a un Cumulative Update posterior.
--- El índice DiskANN mejora el rendimiento de búsqueda pero no afecta
--- la funcionalidad de VECTOR_DISTANCE.
---
--- Sintaxis para cuando esté disponible:
--- CREATE VECTOR INDEX IX_Vehiculo_DescripcionVector
--- ON [vehiculo].[Vehiculo] (DescripcionVector)
--- WITH (METRIC = 'cosine');
+-- 8. VECTOR_SEARCH — Búsqueda aproximada con índice DiskANN
+-- Más eficiente para grandes volúmenes de datos
 -- =============================================================================
+DECLARE @json2 NVARCHAR(MAX) = '';
+DECLARE @j INT = 1;
+WHILE @j <= 1536
+BEGIN
+    SET @json2 = @json2 + '0.5';
+    IF @j < 1536 SET @json2 = @json2 + ',';
+    SET @j = @j + 1;
+END
+SET @json2 = '[' + @json2 + ']';
+DECLARE @v VECTOR(1536) = @json2;
+
+SELECT TOP(5)
+    s.distance AS Distancia,
+    v.Placa,
+    mv.Nombre AS Modelo,
+    cv.Descripcion AS Categoria
+FROM VECTOR_SEARCH(
+    TABLE = [vehiculo].[Vehiculo] AS v,
+    COLUMN = DescripcionVector,
+    SIMILAR_TO = @v,
+    METRIC = 'cosine',
+    TOP_N = 5
+) AS s
+JOIN [vehiculo].[ModeloVehiculo] mv ON v.ModeloVehiculo_ID = mv.ModeloVehiculo_ID
+JOIN [vehiculo].[CategoriaVehiculo] cv ON v.CategoriaVehiculo_ID = cv.CategoriaVehiculo_ID
+ORDER BY s.distance ASC;
+GO

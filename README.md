@@ -56,6 +56,8 @@ El proyecto implementa un ecosistema seguro con hardening de plataforma operativ
 
 ## Infraestructura Azure
 
+### IaaS — SQL Server 2025 (Bloques 5-12, 14)
+
 | Componente | Detalle |
 |------------|---------|
 | **VM** | vm-projectdb |
@@ -63,6 +65,18 @@ El proyecto implementa un ecosistema seguro con hardening de plataforma operativ
 | **Imagen** | Windows Server 2025 Datacenter Gen2 |
 | **Tamaño** | Standard_B2as_v2 (2 vCPU, 8 GB RAM) |
 | **Grupo de Recursos** | rg-projectdb |
+
+### PaaS — Azure SQL Database (Bloque 13)
+
+| Componente | Detalle |
+|------------|---------|
+| **Resource Group** | rg-rentacr-paas |
+| **Servidor lógico** | sql-rentacr-paas.database.windows.net |
+| **Base de datos** | RentaCR |
+| **Tier** | Basic (5 DTUs, 2 GB) |
+| **Región** | Canada Central |
+| **Autenticación** | SQL + Microsoft Entra ID |
+| **TLS mínimo** | 1.2 |
 
 ### Distribución de Discos (LUNs)
 
@@ -100,11 +114,11 @@ El proyecto implementa un ecosistema seguro con hardening de plataforma operativ
 | 6 | Hardening del ecosistema (CIS WS2025) | 5 | ✅ Completado |
 | 7 | Instalación y configuración SGBDR | 5 | ✅ Completado |
 | 8 | Hardening SGBDR (CIS SS2022) + auditoría + TDE | 5 | ✅ Completado |
-| 9 | Arquitectura de datos + LUNs + SS2025 features | 30 | ⚠️ En proceso |
+| 9 | Arquitectura de datos + LUNs + SS2025 features | 30 | ✅ Completado |
 | 10 | Tablas in-memory | 3 | ✅ Completado |
 | 11 | Población de la base de datos | 2 | ✅ Completado |
 | 12 | Seguridad y regulación | 10 | ✅ Completado |
-| 13 | Alta disponibilidad — Azure PaaS | 10 | ⏳ Pendiente |
+| 13 | Alta disponibilidad — Azure PaaS | 10 | ✅ Completado |
 | 14 | Serialización JSON | 5 | ✅ Completado |
 | **Total** | | **85** | |
 
@@ -129,10 +143,10 @@ El proyecto implementa un ecosistema seguro con hardening de plataforma operativ
 | Dynamic Data Masking | ✅ Implementado | Correo, cédula, dirección |
 | Row Level Security | ✅ Implementado | Por sucursal en Contrato y DisponibilidadVehiculo |
 | Serialización JSON | ✅ Implementado | sp_SerializarClientesJSON probado |
-| Vector Search | ⚠️ En proceso | VECTOR(1536) + VECTOR_DISTANCE funcional, DiskANN pendiente por limitación de build |
-| External API BCCR | ⚠️ En proceso | sp_invoke_external_rest_endpoint funcional, API BCCR caída |
-| REGEXP_LIKE | ⚠️ En proceso | No disponible en build RTM-GDR, requiere actualización CU |
-| Azure SQL Database PaaS | ⏳ Pendiente | Deploy completo pendiente |
+| Vector Search | ✅ Implementado | VECTOR(1536) + VECTOR_DISTANCE + VECTOR_SEARCH + DiskANN (PREVIEW_FEATURES=ON) |
+| External API | ✅ Implementado | sp_invoke_external_rest_endpoint con exchangerate-api.com (BCCR bloquea IPs Azure) |
+| REGEXP_LIKE | ✅ Implementado | Funcional en build 17.0.1115.1 RTM-GDR — 3 SPs de validación |
+| Azure SQL Database PaaS | ✅ Implementado | sql-rentacr-paas.database.windows.net — 41 tablas, DDM, RLS, TDE activos |
 | Backup completo | ✅ Implementado | RentaCR_before_TDE.bak y RentaCR_post_poblacion.bak |
 
 ---
@@ -229,9 +243,9 @@ rentacr-projectodb/
 
 ### Bloque 9 — Arquitectura de datos (30 pts)
 - [x] Modelo lógico creado — 10 pts
-- [x] Vector Data and Semantic Search — 5 pts ⚠️
-- [x] External API calls — 5 pts ⚠️
-- [ ] Expresiones regulares avanzadas — 5 pts ⏳
+- [x] Vector Data and Semantic Search — 5 pts
+- [x] External API calls — 5 pts
+- [x] Expresiones regulares avanzadas — 5 pts
 - [x] Solución de LUNs (diseño físico) — 5 pts
 
 ### Bloque 10 — In-Memory (3 pts)
@@ -247,7 +261,7 @@ rentacr-projectodb/
 - [x] Row Level Security por sucursal — 2 pts
 
 ### Bloque 13 — Alta Disponibilidad (10 pts)
-- [ ] Azure SQL Database PaaS — 10 pts ⏳
+- [x] Azure SQL Database PaaS — 10 pts
 
 ### Bloque 14 — Serialización JSON (5 pts)
 - [x] sp_SerializarClientesJSON funcional con datos reales — 5 pts

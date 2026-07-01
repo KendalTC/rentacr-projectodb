@@ -3,7 +3,7 @@
 ## Objetivo
 Modelo de datos completo para el sistema RentaCR, con LUNs separados por tipo de archivo e implementación de las tres funcionalidades nuevas de SQL Server 2025.
 
-**Valor:** 30 puntos | **Estado:** ⚠️ En proceso
+**Valor:** 30 puntos | **Estado:** ✅ Completo
 
 ---
 
@@ -31,9 +31,9 @@ Modelo de datos completo para el sistema RentaCR, con LUNs separados por tipo de
 
 | SP | Esquema | Descripción |
 |----|---------|-------------|
-| sp_ValidarVehiculo | vehiculo | Valida Placa y VIN con LIKE |
-| sp_ValidarContacto | persona | Valida correo y teléfono |
-| sp_ValidarIdentificacion | persona | Valida cédula física |
+| sp_ValidarVehiculo | vehiculo | Valida Placa y VIN con REGEXP_LIKE |
+| sp_ValidarContacto | persona | Valida correo y teléfono con REGEXP_LIKE |
+| sp_ValidarIdentificacion | persona | Valida cédula física con REGEXP_LIKE |
 | sp_ObtenerTipoCambioBCCR | alquiler | External API BCCR |
 | sp_SerializarClientesJSON | persona | Serialización JSON clientes |
 
@@ -68,9 +68,11 @@ Modelo de datos completo para el sistema RentaCR, con LUNs separados por tipo de
 | Columna | vehiculo.Vehiculo.DescripcionVector |
 | Tipo | VECTOR(1536) |
 | Métrica | cosine |
-| Función | VECTOR_DISTANCE |
-| Índice DiskANN | Pendiente — limitación de build RTM-GDR |
-| Estado | ⚠️ Funcional sin índice |
+| Función | VECTOR_DISTANCE + VECTOR_SEARCH |
+| Índice DiskANN | ✅ Funcional — PREVIEW_FEATURES=ON requerido |
+| Estado | ✅ Completo |
+
+> **Requisito:** `ALTER DATABASE SCOPED CONFIGURATION SET PREVIEW_FEATURES = ON;` antes de crear el índice DiskANN y usar VECTOR_SEARCH. El warning "join order enforced" al crear el índice es normal.
 
 ### 2. External API Calls
 
@@ -78,10 +80,9 @@ Modelo de datos completo para el sistema RentaCR, con LUNs separados por tipo de
 |-----------|---------|
 | Feature | sp_invoke_external_rest_endpoint |
 | SP | alquiler.sp_ObtenerTipoCambioBCCR |
-| API objetivo | BCCR — Tipo de cambio USD |
-| Estado feature | ✅ Habilitada y funcional |
-| Estado API BCCR | ⚠️ API externa devuelve HTTP 500 (servicio caído) |
-| Prueba alternativa | httpbin.org — HTTP 200 ✅ |
+| API utilizada | exchangerate-api.com (BCCR bloquea IPs Azure) |
+| Parseo | JSON_VALUE(@response, '$.result.rates.CRC') |
+| Estado | ✅ Funcional |
 
 ### 3. Expresiones Regulares Avanzadas (REGEXP_LIKE)
 
@@ -90,8 +91,9 @@ Modelo de datos completo para el sistema RentaCR, con LUNs separados por tipo de
 | Función | REGEXP_LIKE |
 | Versión instalada | 17.0.1115.1 (RTM-GDR) |
 | Compatibility Level | 170 |
-| Estado | ⚠️ No disponible en esta build — requiere CU posterior |
-| Alternativa | Validación con LIKE implementada en los 3 SPs |
+| Estado | ✅ Funcional — disponible en esta build |
+| Sintaxis | `IF NOT REGEXP_LIKE(@valor, N'^patron$')` |
+| SPs implementados | sp_ValidarVehiculo, sp_ValidarContacto, sp_ValidarIdentificacion |
 
 ---
 
